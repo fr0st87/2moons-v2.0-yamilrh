@@ -15,6 +15,9 @@
  * @link https://github.com/jkroepke/2Moons
  */
  
+/**
+ * @deprecated Esta clase usa mysqli y está obsoleta. Usar la clase Database (PDO) para compatibilidad con PHP 8.3.
+ */
 class Database_BC extends mysqli
 {
 	protected $exception;

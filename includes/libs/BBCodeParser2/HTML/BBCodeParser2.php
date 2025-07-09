@@ -83,7 +83,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      array
      */
-    var $_definedTags  = array();
+    public $_definedTags  = array();
 
     /**
      * A string containing the input
@@ -91,7 +91,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      string
      */
-    var $_text          = '';
+    public $_text          = '';
 
     /**
      * A string containing the preparsed input
@@ -99,7 +99,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      string
      */
-    var $_preparsed     = '';
+    public $_preparsed     = '';
 
     /**
      * An array tags and texts build from the input text
@@ -107,7 +107,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      array
      */
-    var $_tagArray      = array();
+    public $_tagArray      = array();
 
     /**
      * A string containing the parsed version of the text
@@ -115,7 +115,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      string
      */
-    var $_parsed        = '';
+    public $_parsed        = '';
 
     /**
      * An array of options, filled by an ini file or through the contructor
@@ -123,7 +123,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      array
      */
-    var $_options = array(
+    public $_options = array(
         'quotestyle'    => 'double',
         'quotewhat'     => 'all',
         'open'          => '[',
@@ -138,7 +138,7 @@ class HTML_BBCodeParser2
      * @access   private
      * @var      array
      */
-    var $_filters       = array();
+    public $_filters       = array();
 
     /**
      * Constructor, initialises the options and filters
@@ -154,7 +154,7 @@ class HTML_BBCodeParser2
      * @access   public
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function __construct($options = array())
+    public function __construct($options = array())
     {
         // set the options passed as an argument
         foreach ($options as $k => $v )  {
@@ -194,7 +194,7 @@ class HTML_BBCodeParser2
      * @param mixed  option value
      * @author Lorenzo Alberton <l.alberton@quipo.it>
      */
-    function setOption($name, $value)
+    public function setOption($name, $value)
     {
         $this->_options[$name] = $value;
     }
@@ -205,7 +205,7 @@ class HTML_BBCodeParser2
      * @param string filter
      * @author Lorenzo Alberton <l.alberton@quipo.it>
      */
-    function addFilter($filter)
+    public function addFilter($filter)
     {
         $filter = ucfirst($filter);
         if (!array_key_exists($filter, $this->_filters)) {
@@ -230,7 +230,7 @@ class HTML_BBCodeParser2
      * @param string $filter
      * @author Lorenzo Alberton <l.alberton@quipo.it>
      */
-    function removeFilter($filter)
+    public function removeFilter($filter)
     {
         $filter = ucfirst(trim($filter));
         if (!empty($filter) && array_key_exists($filter, $this->_filters)) {
@@ -254,7 +254,7 @@ class HTML_BBCodeParser2
      * @return boolean true if all ok, false if not.
      * @author Lorenzo Alberton <l.alberton@quipo.it>
      */
-    function addFilters($filters)
+    public function addFilters($filters)
     {
         if (is_string($filters)) {
             //comma-separated list
@@ -292,7 +292,7 @@ class HTML_BBCodeParser2
      * @see      $_text
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function _preparse()
+    public function _preparse()
     {
         // default: assign _text to _preparsed, to be overwritten by filters
         $this->_preparsed = $this->_text;
@@ -327,7 +327,7 @@ class HTML_BBCodeParser2
      * @see      $_tagArray
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function _buildTagArray()
+    public function _buildTagArray()
     {
         $this->_tagArray = array();
         $str = $this->_preparsed;
@@ -405,7 +405,7 @@ class HTML_BBCodeParser2
      * @see      _buildTagArray()
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function _buildTag($str)
+    public function _buildTag($str)
     {
         $tag = array('text' => $str, 'attributes' => array());
 
@@ -477,7 +477,7 @@ class HTML_BBCodeParser2
      * @see      $_tagArray
      * @author   Stijn de Reede  <sjr@gmx.co.uk>, Seth Price <seth@pricepages.org>
      */
-    function _validateTagArray()
+    public function _validateTagArray()
     {
         $newTagArray = array();
         $openTags = array();
@@ -601,7 +601,7 @@ class HTML_BBCodeParser2
      * @see      _validateTagArray()
      * @author   Seth Price <seth@pricepages.org>
      */
-    function _parentNeeded($out, $in)
+    public function _parentNeeded($out, $in)
     {
         if (!isset($this->_definedTags[$in]['parent']) ||
             ($this->_definedTags[$in]['parent'] == 'all')
@@ -641,7 +641,7 @@ class HTML_BBCodeParser2
      * @see      _validateTagArray()
      * @author   Seth Price <seth@pricepages.org>
      */
-    function _childNeeded($out, $in)
+    public function _childNeeded($out, $in)
     {
         if (!isset($this->_definedTags[$out]['child']) ||
            ($this->_definedTags[$out]['child'] == 'all')
@@ -679,7 +679,7 @@ class HTML_BBCodeParser2
      * @see      _validateTagArray()
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function _isAllowed($out, $in)
+    public function _isAllowed($out, $in)
     {
         if (!$out || ($this->_definedTags[$out]['allowed'] == 'all')) {
             return true;
@@ -711,7 +711,7 @@ class HTML_BBCodeParser2
      * @see      $_parsed
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function _buildParsedString()
+    public function _buildParsedString()
     {
         $this->_parsed = '';
         foreach ($this->_tagArray as $tag) {
@@ -768,7 +768,7 @@ class HTML_BBCodeParser2
      * @see      $_text
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function setText($str)
+    public function setText($str)
     {
         $this->_text = $str;
     }
@@ -782,7 +782,7 @@ class HTML_BBCodeParser2
      * @see      $_text
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function getText()
+    public function getText()
     {
         return $this->_text;
     }
@@ -796,7 +796,7 @@ class HTML_BBCodeParser2
      * @see      $_preparsed
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function getPreparsed()
+    public function getPreparsed()
     {
         return $this->_preparsed;
     }
@@ -810,7 +810,7 @@ class HTML_BBCodeParser2
      * @see      $_parsed
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function getParsed()
+    public function getParsed()
     {
         return $this->_parsed;
     }
@@ -826,7 +826,7 @@ class HTML_BBCodeParser2
      * @see      _buildParsedString()
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function parse()
+    public function parse()
     {
         $this->_preparse();
         $this->_buildTagArray();
@@ -843,7 +843,7 @@ class HTML_BBCodeParser2
      * @see      $_text
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function qparse($str)
+    public function qparse($str)
     {
         $this->_text = $str;
         $this->parse();
@@ -859,7 +859,7 @@ class HTML_BBCodeParser2
      * @see      $_text
      * @author   Stijn de Reede  <sjr@gmx.co.uk>
      */
-    function staticQparse($str)
+    public function staticQparse($str)
     {
         $p = new HTML_BBCodeParser2();
         $str = $p->qparse($str);

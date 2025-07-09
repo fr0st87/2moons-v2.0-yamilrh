@@ -29,3 +29,4 @@
 
 [Thanks] :
 - @linkin, @byazrail, @Kaizoku, @noonn, @Danter14, @raycogarcia
+- Migración a Smarty 4.x y compatibilidad con PHP 8.3. Se eliminó la versión manual de Smarty y ahora se gestiona por Composer.

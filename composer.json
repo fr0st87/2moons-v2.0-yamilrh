@@ -10,6 +10,8 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {},
+    "require": {
+        "smarty/smarty": "^4.0"
+    },
     "require-dev": {}
 }
