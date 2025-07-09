@@ -15,7 +15,7 @@
  * @link https://github.com/jkroepke/2Moons
  */
 
-require('includes/libs/Smarty/libs/Smarty.class.php');
+require_once __DIR__ . '/../../vendor/autoload.php';
 		
 class template extends Smarty
 {
@@ -32,9 +32,10 @@ class template extends Smarty
 	private function smartySettings()
 	{
 
-		require_once './includes/libs/Smarty/libs/plugins/modifier.number_format.php';
-		require_once './includes/libs/Smarty/libs/plugins/modifier.json.php';
-		require_once './includes/libs/Smarty/libs/plugins/modifier.time.php';
+		// require_once './includes/libs/Smarty/libs/plugins/modifier.number_format.php';
+		// require_once './includes/libs/Smarty/libs/plugins/modifier.json.php';
+		// require_once './includes/libs/Smarty/libs/plugins/modifier.time.php';
+		$this->addPluginsDir(__DIR__ . '/../libs/Smarty/libs/plugins/');
 
 		//$this->registerPlugin("modifier","htmlspecialchars", "smarty_modifier_htmlspecialchars");
 		$this->registerPlugin("modifier","number", "smarty_modifier_number_format");
@@ -57,8 +58,13 @@ class template extends Smarty
 		$this->setForceCompile(true);
 		$this->setCaching(Smarty::CACHING_OFF);
 
-		require_once 'includes/libs/wcf/BasicFileUtil.class.php';
-		return BasicFileUtil::getTempFolder();
+		// Si BasicFileUtil no es necesario, usar sys_get_temp_dir()
+		if (class_exists('BasicFileUtil')) {
+			require_once 'includes/libs/wcf/BasicFileUtil.class.php';
+			return BasicFileUtil::getTempFolder();
+		} else {
+			return sys_get_temp_dir();
+		}
 	}
 		
 	public function assign_vars($var, $nocache = true) 

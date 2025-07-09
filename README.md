@@ -29,3 +29,15 @@
 
 [Thanks] :
 - @linkin, @byazrail, @Kaizoku, @noonn, @Danter14, @raycogarcia
+
+## Instalación y pruebas en PHP 8.3
+
+1. Instala PHP 8.3 y Composer en tu sistema.
+2. Ejecuta:
+   ```
+   composer install
+   ```
+3. Configura tu servidor web para apuntar al directorio del proyecto.
+4. Accede a la aplicación y verifica que todo funcione correctamente.
+
+Si encuentras errores relacionados con Smarty o compatibilidad PHP, revisa los logs y reporta los problemas.
