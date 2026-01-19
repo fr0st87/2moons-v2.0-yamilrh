@@ -1,17 +1,13 @@
 {
-    "name": "2moons/2moons",
-    "description": "Online browser game.",
+    "name": "nba-data-fetcher",
+    "description": "NBA data fetcher and viewer",
     "type": "project",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Jan-Otto Kröpke",
-            "email": "kroepke@outlook.com"
-        }
-    ],
-    "minimum-stability": "stable",
     "require": {
-        "smarty/smarty": "^4.0"
+        "php": ">=7.4"
     },
-    "require-dev": {}
+    "autoload": {
+        "psr-4": {
+            "NBA\\": "src/"
+        }
+    }
 }
